@@ -16,11 +16,14 @@ $pedestrianWay = new PedestrianWay();
 $residentialWay = new ResidentialWay();
 
 
+try {
+    $car->start();
+} catch (Exception $e) {
+    $car->setHasParkBrake(false);
+}finally {
+    echo "Ma voiture roule comme un donut";
+}
 
-
-var_dump($motorWay);
-var_dump($pedestrianWay);
-var_dump($residentialWay);
 ?>
 
 

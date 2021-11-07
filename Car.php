@@ -1,70 +1,76 @@
 <?php
-class Car
+require_once 'Vehicle.php';
+class Car extends Vehicle
 {
-   private $color;
-   private   $nbWheels; 
-   private   $nbSeats ;
-   private   $currentSpeed ; 
-   private  $typeEnergie ;
-   private   $fuelLevel ;
-   private $hasParkBrake;
+    public const ALLOWED_ENERGIES = [
+        'fuel',
+        'electric',
+    ];
 
-   public function __construct($color, $nbSeats, $energyType)
+    private $color;
+    private   $nbWheels;
+    private   $nbSeats ;
+    private   $currentSpeed ;
+    private  $typeEnergie ;
+    private   $fuelLevel ;
+    private $hasParkBrake;
+
+    public function __construct($color, $nbSeats, $energyType)
     {
-     $this->color = $color;
-     $this->nbSeats = $nbSeats;
-     $this->typeEnergie = $energyType;
+        $this->color = $color;
+        $this->nbSeats = $nbSeats;
+        $this->typeEnergie = $energyType;
     }
 
-	
-
-public function forward(): string
-	
- {
-$this->currentSpeed = 30;
-
-   return "lets go";
-}
-
-public function brake(): string{
-$sentence = "";
- while ($this->currentSpeed > 0) {
- $this->currentSpeed-=5;
- $sentence .= "Brake !!!";
- }
- $sentence .= "I'm stopped !";
-return $sentence;
-}
 
 
-
- public function getColor(): string
-{  
-  return $this->color;
- }
-
- public function getCurrentSpeed(): int 
- {
- return $this->currentSpeed;
-  }
+    public function start(): string
+    {
+        if($this->hasParkBrake) {
+            throw new Exception('Frain à main activé <br>');
+        }
+        $this->currentSpeed = 40;
+        return "Go !";
+    }
 
 
- public function getNbWheels(): int
- {
-  return $this->nbWheels;
- }
-	
- public function getNbSeats() : int
- {
-  return $this->nbSeats;
- }
+    public function getColor(): string
+    {
+        return $this->color;
+    }
 
- public function getFuelLevel():int {
- return $this->fuelLevel;
- }
-        
- public function getTypeEnergie(): string {
+    public function getCurrentSpeed(): int
+    {
+        return $this->currentSpeed;
+    }
 
-   return $this->typeEnergie;
- }
+
+    public function getNbWheels(): int
+    {
+        return $this->nbWheels;
+    }
+
+    public function getNbSeats() : int
+    {
+        return $this->nbSeats;
+    }
+
+    public function getFuelLevel():int {
+        return $this->fuelLevel;
+    }
+
+    public function getTypeEnergie(): string {
+
+        return $this->typeEnergie;
+    }
+    public function setHasParkBrake(bool $hasParkBrake): void
+    {
+        $this->hasParkBrake = $hasParkBrake;
+    }
+
+    public function getHasParkBrake(): bool
+    {
+        return $this->hasParkBrake;
+    }
+
 }
